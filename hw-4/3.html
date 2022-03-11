@@ -31,24 +31,22 @@
 <script>
   "use strict";
 
-  let numberObj = {};
 
-  function getDigitsOfNumber(number) {
-    if (number >= 0 && number < 1000) {
-      numberObj = {
-        hundres: Math.floor(number / 100) % 10,
-        dozens: Math.floor(number / 10) % 10,
-        units: Math.floor(number % 10),
-      }
-      return numberObj;
-    } else {
-      console.log("Вы ввели не корректное число");
+  function getDigitsOfNumber(num) {
+    if (!Number.isInteger(num) || num < 0 || num > 999) {
+      console.log("Error!");
+      return {};
     }
+    return {
+      hundreds: Math.floor(num / 100) % 10,
+      dozens: Math.floor(num / 10) % 10,
+      units: num % 10,
+    };
   }
 
-  let number = +prompt("Введите число от 0 до 1000");
+  let number = +prompt("Bведите число от 0 до 1000");
   console.log(getDigitsOfNumber(number));
-
+  
 </script>
 </body>
 </html>

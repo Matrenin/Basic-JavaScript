@@ -50,66 +50,76 @@
 <script>
   "use strict";
 
-  function PostES5(author, text, date) {
-    this.author = author;
-    this.text = text;
-    this.date = date;
-  }
+function Post5(author, text) {
+  this.author = author;
+  this.text = text;
+  this.updatedAt = new Date();
+}
 
-  PostES5.prototype.edit = function(newText) {
-    this.text = newText;
-  };
+Post5.prototype.edit = function(newText) {
+  this.text = newText;
+  this.updatedAt = new Date();
+};
 
-  let post5 = new PostES5("Roman", "No war");
+let post5 = new Post5("Roman", "Текст для поста");
+console.log(post5);
+
+setTimeout(() => {
+  post5.edit("Новый текст для поста");
   console.log(post5);
+}, 1000);
 
-  function AttachedPostES5(author, text, highlighted) {
-    PostES5.call(this, author, text);
-    this.highlighted = highlighted;
-  }
+function AttachedPost5(author, text) {
+  Post5.call(this, author, text);
+  this.highlighted = false;
+}
 
-  AttachedPostES5.prototype = Object.create(PostES5.prototype);
-  AttachedPostES5.prototype.constructor = AttachedPostES5;
+AttachedPost5.prototype = Object.create(Post5.prototype);
+AttachedPost5.prototype.constructor = AttachedPost5;
 
-  AttachedPostES5.prototype.makeTextHighlighted = function() {
-    this.highlighted = true;
-  };
+AttachedPost5.prototype.makeTextHighlighted = function() {
+  this.highlighted = true;
+  this.updatedAt = new Date();
+}
 
-  let attachedPost5 = new AttachedPostES5("Petr", "Olympus af-10 mini", false);
+let attachedPost5 = new AttachedPost5("Автор", "Текст для поста");
+console.log(attachedPost5);
+
+setTimeout(() => {
+  attachedPost5.makeTextHighlighted();
   console.log(attachedPost5);
-
-      // =============
-
-  class PostES6 {
-    constructor(author, text, date) {
+}, 1000);
+  
+  class Post6 {
+    constructor(author, text) {
       this.author = author;
       this.text = text;
-      this.date = date;
+      this.updatedAt = new Date();
     }
 
     edit(newText) {
       this.text = newText;
+      this.updatedAt = new Date();
     }
   }
 
-  let post6 = new PostES6("Roman", "No war");
+  let post6 = new Post6("Roman", "Текст для поста");
   console.log(post6);
-  post6.edit("OOP JS");
 
-  class AttachedPostES6 extends PostES6 {
-    constructor(author, text, highlighted) {
+  class AttachedPost6 extends Post6 {
+    constructor(author, text) {
       super(author, text);
-      this.highlighted = highlighted;
+      this.highlighted = false;
     }
 
     makeTextHighlighted() {
       this.highlighted = true;
+      this.updatedAt = new Date();
     }
   }
 
-  let attachedPost6 = new AttachedPostES6("Petr", "Olympus af-10 mini", false);
+  let attachedPost6 = new AttachedPost6("Автор", "Текст для поста");
   console.log(attachedPost6);
-  
 
 </script>
 </body>
